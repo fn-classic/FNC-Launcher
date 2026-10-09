@@ -1,0 +1,11 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+ <ItemGroup Label="ProjectConfigurations"><ProjectConfiguration Include="Release|x64"><Configuration>Release</Configuration><Platform>x64</Platform></ProjectConfiguration></ItemGroup>
+ <PropertyGroup Label="Globals"><ProjectGuid>{049C370C-38B2-409D-A4EC-3BB0610B640A}</ProjectGuid><WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion></PropertyGroup>
+ <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+ <PropertyGroup Label="Configuration"><ConfigurationType>Application</ConfigurationType><PlatformToolset>v145</PlatformToolset><CharacterSet>Unicode</CharacterSet></PropertyGroup>
+ <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+ <PropertyGroup><OutDir>$(ProjectDir)..\releases\complete-installer\</OutDir><IntDir>$(ProjectDir)obj\</IntDir><TargetName>FNClassic-Setup</TargetName></PropertyGroup>
+ <ItemDefinitionGroup><ClCompile><RuntimeLibrary>MultiThreaded</RuntimeLibrary><Optimization>MaxSpeed</Optimization><LanguageStandard>stdcpp17</LanguageStandard></ClCompile><Link><SubSystem>Windows</SubSystem></Link></ItemDefinitionGroup>
+ <ItemGroup><ClCompile Include="Bootstrap.cpp"/><ResourceCompile Include="Payload.rc"/></ItemGroup>
+ <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+</Project>
