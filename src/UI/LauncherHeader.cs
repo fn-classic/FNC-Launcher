@@ -21,6 +21,7 @@ namespace FssLauncher {
    var verify=menu.Items.Add("Verify game files");verify.Enabled=!verifying&&!installing&&!launchPending&&connection.GameProcessId==0;verify.Click+=async delegate{await VerifyGameFiles();};
    var options=menu.Items.Add("Game installation options…");options.Click+=async delegate{await ConfigureConnection();};
    if(!installation.Valid||installation.NeedsUpdate){var install=menu.Items.Add(InstallButton.Text);install.Enabled=!installing;install.Click+=async delegate{await InstallStudio();};}
+   AddUpdateMenu(menu);
    menu.Closed+=delegate{menu.Dispose();};menu.Show(DownloadButton,new Point(0,DownloadButton.Height));
   }
  }

@@ -39,3 +39,5 @@ __pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+/update-settings.json
+/updates/

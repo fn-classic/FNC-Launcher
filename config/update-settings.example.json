@@ -1,0 +1,5 @@
+{
+  "feedUrl": "https://github.com/fn-classic/FNC-Launcher/releases/latest/download/update.json",
+  "autoDownload": true,
+  "autoInstall": true
+}

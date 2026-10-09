@@ -46,6 +46,9 @@ static DWORD Run(const std::wstring& file,const std::wstring& args,bool elevated
 }
 int WINAPI wWinMain(HINSTANCE,HINSTANCE,PWSTR,int){
  int count=0;auto args=CommandLineToArgvW(GetCommandLineW(),&count);bool audit=count==3&&wcscmp(args[1],L"--extract-only")==0;
+ bool update=count==4&&wcscmp(args[1],L"--auto-update")==0;
+ std::wstring updateRoot=update?args[2]:L"";
+ std::wstring setupArguments=update?L"--apply-update \""+std::wstring(args[2])+L"\" "+args[3]:L"--setup";
  wchar_t temp[MAX_PATH]={};GetTempPathW(MAX_PATH,temp);GUID id;CoCreateGuid(&id);wchar_t guid[48];StringFromGUID2(id,guid,48);
  std::wstring folder=audit?args[2]:std::wstring(temp)+L"FNClassicSetup-"+guid;LocalFree(args);
  int directoryResult=SHCreateDirectoryExW(nullptr,folder.c_str(),nullptr);
@@ -72,8 +75,8 @@ int WINAPI wWinMain(HINSTANCE,HINSTANCE,PWSTR,int){
    if(code!=0){Failure=L"The bundled DirectX runtime could not be installed (error "+std::to_wstring(code)+L").";goto fail;}
   }
   if(restart){MessageBoxW(nullptr,L"The required runtimes were installed. Restart Windows, then run this installer again to finish. Setup will not restart your PC automatically.",L"Fortnite Classic Setup",MB_OK|MB_ICONINFORMATION);return 3010;}
-  auto code=Run(folder+L"\\FNClassicLauncher.exe",L"--setup",false);
-  for(const auto& file:files)DeleteFileW((folder+L"\\"+file.name).c_str());RemoveDirectoryW(folder.c_str());return (int)code;
+  auto code=Run(folder+L"\\FNClassicLauncher.exe",setupArguments,false);
+  for(const auto& file:files)DeleteFileW((folder+L"\\"+file.name).c_str());RemoveDirectoryW(folder.c_str());if(update)ShellExecuteW(nullptr,L"open",(updateRoot+L"\\Launcher\\FNClassicLauncher.exe").c_str(),(L"--studio-root \""+updateRoot+L"\"").c_str(),updateRoot.c_str(),SW_SHOWNORMAL);return (int)code;
  }
 fail:
  MessageBoxW(nullptr,Failure.c_str(),L"Fortnite Classic Setup",MB_OK|MB_ICONERROR);return 1;

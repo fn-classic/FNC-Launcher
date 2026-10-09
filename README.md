@@ -34,3 +34,7 @@ Phase 2 adds persisted installation selection for 1.7.2, 1.8, 1.8.2 and 3.5, exe
 This folder is the repository root. Commit the source, assets, examples, lockfile and `vendor` SDK package; do not upload `build`, release installers, runtimes or saved accounts. The SDK package is a required pinned build dependency, not a generated application release. Start with `Build.ps1` to verify a fresh checkout.
 
 The Friends panel uses the existing backend friendship and presence records. It opens beneath the header as an owned, modeless panel. The Launch button uses the supplied reference colors, dimensions and gear asset.
+
+## Automatic updates
+
+Launcher, Backend and GameServer are distributed as a compatible bundled release. The launcher and background service watcher use the latest FNC-Launcher GitHub release manifest. Existing users first install the updater-enabled build manually. Hosted matches and clients must finish before automatic installation. See the Launcher repository `docs/UPDATES.md` for publication and configuration.

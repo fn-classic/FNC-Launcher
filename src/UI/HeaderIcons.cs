@@ -17,6 +17,7 @@ namespace FssLauncher {
      using(var arrowPen=new Pen(color,4))g.DrawLine(arrowPen,cx,cy-9,cx,cy+2);
      g.FillPolygon(brush,new[]{new PointF(cx-6,cy-1),new PointF(cx+6,cy-1),new PointF(cx,cy+6)});
      g.DrawLines(pen,new[]{new PointF(cx-8,cy+3),new PointF(cx-8,cy+9),new PointF(cx+8,cy+9),new PointF(cx+8,cy+3)});
+     if(online)using(var badge=new SolidBrush(Color.FromArgb(148,196,139)))g.FillEllipse(badge,cx+8,cy-11,6,6);
     }else if(kind=="settings"){
      var points=new PointF[32];for(int n=0;n<32;n++){double angle=n*Math.PI/16;float radius=n%4==0||n%4==3?9:6.7f;points[n]=new PointF(cx+(float)Math.Cos(angle)*radius,cy+(float)Math.Sin(angle)*radius);}
      using(var path=new GraphicsPath(FillMode.Alternate)){path.AddPolygon(points);path.AddEllipse(cx-3,cy-3,6,6);g.FillPath(brush,path);}
